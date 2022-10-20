@@ -1,21 +1,23 @@
-import React from "react";
+import React, {useState} from "react";
 
-function ListingCard() {
+function ListingCard({blam, handleDelete}) {
+
+  const [star, setStar] = useState(true)
+
   return (
     <li className="card">
       <div className="image">
         <span className="price">$0</span>
-        <img src={"https://via.placeholder.com/300x300"} alt={"description"} />
+        <img src={blam.image} alt={blam.description} />
       </div>
       <div className="details">
-        {true ? (
-          <button className="emoji-button favorite active">★</button>
-        ) : (
-          <button className="emoji-button favorite">☆</button>
-        )}
-        <strong>{"description"}</strong>
-        <span> · {"location"}</span>
-        <button className="emoji-button delete">🗑</button>
+        { !star ?
+         <button onClick={()=>{setStar(!star)}} className="emoji-button favorite active">★</button>:
+         <button onClick={()=>{setStar(!star)}} className="emoji-button favorite">☆</button>
+        }
+        <strong>{blam.description}</strong>
+        <span> · {blam.location}</span>
+        <button onClick={()=>handleDelete(blam)} className="emoji-button delete">🗑</button>
       </div>
     </li>
   );
